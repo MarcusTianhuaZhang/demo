@@ -16,13 +16,20 @@ public class MovieController {
     }
 
     @GetMapping
-    public List<Movie> getMovie() {
-        //return movieService.getMovie();
-        return movieService.getMovie();
+    public List<Movie> getMovie(@RequestParam(required = false) final String title) {
+        if (title != null) {
+            return List.of(movieService.getMovieByTitle(title));
+        } else {
+            return movieService.getMovie();}
     }
+
     @PostMapping
     public void addNewMovie(@RequestBody Movie movie){
 
         movieService.addNewMovie(movie);
+    }
+    @DeleteMapping(path = "{movieTitle}")
+    public void deleteMovie(@PathVariable("movieTitle") String title){
+        movieService.deleteMovie(title);
     }
 }

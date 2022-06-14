@@ -16,10 +16,13 @@ public class Movie {
 //            strategy =GenerationType.SEQUENCE,
 //            generator = "movie_sequence"
 //    )
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "movie_title")
     private String title;
     private String description;
     private Integer releaseYear;
     private double duration;
+    @Transient
     private double rating;
 
     public Movie(String title, String description, Integer releaseYear, double duration, double rating) {
