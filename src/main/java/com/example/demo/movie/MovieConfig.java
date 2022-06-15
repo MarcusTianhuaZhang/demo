@@ -16,14 +16,12 @@ public class MovieConfig {
             Movie shrek = new Movie("Shrek",
                     "good movie",
                     2005,
-                    135,
-                    8.2
+                    135.0
             );
             Movie interstellar = new Movie("Interstellar",
                     "super good movie",
                     2015,
-                    135,
-                    9.2
+                    135.0
             );
             repository.saveAll(
                     List.of(shrek, interstellar)

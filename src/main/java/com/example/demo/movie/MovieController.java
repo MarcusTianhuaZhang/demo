@@ -30,10 +30,19 @@ public class MovieController {
         movieService.addNewMovie(movie);
     }
 
-    @PostMapping(path = "review")
-    public void addNewReview(@RequestBody Review review){
+    @PostMapping  (path = "/review/{movieTitle}")
+    public void addNewReview(@PathVariable String movieTitle, @RequestBody Boolean like){
 
-        movieService.addNewReview(review);
+        movieService.addNewReview(movieTitle, like);
+    }
+
+    @PutMapping(path = "{movieTitle}")
+    public void updateMovie(
+            @PathVariable("movieTitle") String title,
+            @RequestParam(required = false) String description,
+            @RequestParam(required = false) Integer releaseYear,
+            @RequestParam(required = false) Double duration){
+        movieService.updateMovie(title, description,releaseYear,duration);
     }
 
 

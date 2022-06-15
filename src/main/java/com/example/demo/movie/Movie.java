@@ -22,7 +22,7 @@ public class Movie {
     private String title;
     private String description;
     private Integer releaseYear;
-    private double duration;
+    private Double duration;
 
 //    @OneToOne(cascade = CascadeType.ALL)
 //    @JoinColumn(name = "movie")
@@ -33,12 +33,11 @@ public class Movie {
     @Transient
     private double rating;
 
-    public Movie(String title, String description, Integer releaseYear, double duration, double rating) {
+    public Movie(String title, String description, Integer releaseYear, Double duration) {
         this.title = title;
         this.description = description;
         this.releaseYear = releaseYear;
         this.duration = duration;
-        this.rating = rating;
     }
 
     public Movie() {
@@ -56,7 +55,7 @@ public class Movie {
         return releaseYear;
     }
 
-    public double getDuration() {
+    public Double getDuration() {
         return duration;
     }
 
@@ -76,7 +75,7 @@ public class Movie {
         this.releaseYear = releaseYear;
     }
 
-    public void setDuration(double duration) {
+    public void setDuration(Double duration) {
         this.duration = duration;
     }
 

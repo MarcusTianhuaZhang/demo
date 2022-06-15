@@ -2,46 +2,42 @@ package com.example.demo.review;
 
 import com.example.demo.movie.Movie;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
 @Table
 public class Review {
     @Id
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
-    @SequenceGenerator(
-            name = "review_sequence",
-            sequenceName = "review_sequence",
-            allocationSize = 1
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+            name = "UUID",
+            strategy = "org.hibernate.id.UUIDGenerator"
     )
-    @GeneratedValue(
-            strategy =GenerationType.SEQUENCE,
-            generator = "review_sequence"
-    )
-    private Long id;
-    //private String movie_title;
-    private boolean like;
+    @Column(name = "id", updatable = false, nullable = false)
+    private UUID id;
+
+    private int likes;
+    private int dislikes;
 
 
-//    @OneToOne(fetch = FetchType.LAZY)
-//    @MapsId
-
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "movie", insertable=false, updatable=false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "title", insertable=false, updatable=false)
     private Movie movie;
 
     public Review(Movie movie, boolean like) {
         this.movie = movie;
-        this.like = like;
         //this.movie_title = movie_title;
-//        if(like){
-//            this.likes = 1;
-//            this.dislikes = 0;
-//        }else{
-//            this.likes = 0;
-//            this.dislikes = 1;
-//        }
+        if(like){
+            this.likes = 1;
+            this.dislikes = 0;
+        }else{
+            this.likes = 0;
+            this.dislikes = 1;
+        }
     }
 
     public Review() {
@@ -55,21 +51,20 @@ public class Review {
 //        this.movie_title = movie_title;
 //    }
 
-
-    public Long getId() {
-        return id;
+    public int getLikes() {
+        return likes;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setLikes(int likes) {
+        this.likes = likes;
     }
 
-    public boolean isLike() {
-        return like;
+    public int getDislikes() {
+        return dislikes;
     }
 
-    public void setLike(boolean like) {
-        this.like = like;
+    public void setDislikes(int dislikes) {
+        this.dislikes = dislikes;
     }
 
     public Movie getMovie() {
@@ -78,6 +73,14 @@ public class Review {
 
     public void setMovie(Movie movie) {
         this.movie = movie;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
     }
 }
 
