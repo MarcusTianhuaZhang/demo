@@ -1,6 +1,8 @@
 package com.example.demo.movie;
 
 
+import com.example.demo.review.Review;
+import com.example.demo.review.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,10 +14,13 @@ import java.util.Optional;
 public class MovieService {
 
     private final MovieRepository movieRepository;
+    private final ReviewRepository reviewRepository;
+
 
     @Autowired
-    public MovieService(MovieRepository movieRepository) {
+    public MovieService(MovieRepository movieRepository, ReviewRepository reviewRepository) {
         this.movieRepository = movieRepository;
+        this.reviewRepository = reviewRepository;
     }
 
 
@@ -44,5 +49,14 @@ public class MovieService {
                     "movie " + title + "does not exist");
         }
         movieRepository.deleteById(title);
+    }
+    public void addNewReview(Review review) {
+        Movie movie = review.getMovie();
+        boolean exists = movieRepository.existsById(movie.getTitle());
+        if(!exists){
+            throw new IllegalArgumentException(
+                    "movie " + movie.getTitle() + "cannot be reviewed because it does not exist");
+        }
+        reviewRepository.save(review);
     }
 }

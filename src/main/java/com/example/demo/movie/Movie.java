@@ -1,7 +1,10 @@
 package com.example.demo.movie;
 
 
+import com.example.demo.review.Review;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table
@@ -16,12 +19,17 @@ public class Movie {
 //            strategy =GenerationType.SEQUENCE,
 //            generator = "movie_sequence"
 //    )
-//    @OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "movie_title")
     private String title;
     private String description;
     private Integer releaseYear;
     private double duration;
+
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "movie")
+//    private Review review;
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Review> reviews;
+
     @Transient
     private double rating;
 

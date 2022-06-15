@@ -1,5 +1,6 @@
 package com.example.demo.movie;
 
+import com.example.demo.review.Review;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,6 +29,14 @@ public class MovieController {
 
         movieService.addNewMovie(movie);
     }
+
+    @PostMapping(path = "review")
+    public void addNewReview(@RequestBody Review review){
+
+        movieService.addNewReview(review);
+    }
+
+
     @DeleteMapping(path = "{movieTitle}")
     public void deleteMovie(@PathVariable("movieTitle") String title){
         movieService.deleteMovie(title);
