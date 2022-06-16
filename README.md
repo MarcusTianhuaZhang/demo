@@ -2,6 +2,14 @@
  API to manage, search and like/dislike movies.
  
  
+ Application build with Spring Boot, 
+ 
+ object relational mapping with JPA, 
+ connect to PostgreSQL database,
+ 
+ authentication and authorization with Spring Security
+
+ 
  User needs to login to  create, read, update movies.
  
  
@@ -18,8 +26,19 @@ username: user
 password: password
  
  ```
- Only admin can delete movie.
+ USER and ADMIN can create, get and update but
+ oly ADMIN can delete movie.
  
+ ### To read all movies:
+ ```
+ GET http://localhost:8080/api/v1/movie
+ ```
+### To search movie by title:
+```
+GET http://localhost:8080/api/v1/movie?title==movieTitle
+```
+
+
  ### Saple Create Request:
  ```
  POST http://localhost:8080/api/v1/movie
@@ -55,4 +74,3 @@ PUT /api/v1/movie/{movie_title}/dislike
 Security implemented by hard-coded usernames and passwords for in memory authentication
 
 
-Spring Boot, JPA, Spring Security
