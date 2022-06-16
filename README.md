@@ -1,5 +1,5 @@
 # demo
- API to manage, search and like/dislike movies.
+ REST API to manage, search and like/dislike movies.
  
  
  Application build with Spring Boot, 
@@ -19,7 +19,7 @@
 ```
 role: ADMIN
 username: admin 
-password: admin; 
+password: admin
  
 role: USER 
 username: user 
@@ -29,15 +29,6 @@ password: password
  USER and ADMIN can create, get and update but
  oly ADMIN can delete movie.
  
- ### To read all movies:
- ```
- GET http://localhost:8080/api/v1/movie
- ```
-### To search movie by title:
-```
-GET http://localhost:8080/api/v1/movie?title==movieTitle
-```
-
 
  ### Saple Create Request:
  ```
@@ -49,6 +40,15 @@ Content-Type: application/json
   "releaseYear" : 2013,
   "duration" : 118}
   ```
+ ### To read all movies:
+ ```
+ GET http://localhost:8080/api/v1/movie
+ ```
+### To search movie by title:
+```
+GET http://localhost:8080/api/v1/movie?title==movieTitle
+```
+
  ### Sample update request:
  ```
 
