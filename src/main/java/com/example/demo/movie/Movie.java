@@ -1,39 +1,21 @@
 package com.example.demo.movie;
 
-
-import com.example.demo.review.Review;
-
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table
 public class Movie {
     @Id
-//    @SequenceGenerator(
-//            name = "movie_sequence",
-//            sequenceName = "movie_sequence",
-//            allocationSize = 1
-//    )
-//    @GeneratedValue(
-//            strategy =GenerationType.SEQUENCE,
-//            generator = "movie_sequence"
-//    )
     private String title;
+
     private String description;
     private Integer releaseYear;
     private Double duration;
-
-
     private Integer likes;
     private Integer dislikes;
 
-////    @OneToOne(cascade = CascadeType.ALL)
-////    @JoinColumn(name = "movie")
-////    private Review review;
-//    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//    private List<Review> reviews;
-
+    //use @Transient because rating can be calculate by likes/dislikes
+    //thus rating does not need to persist to database
     @Transient
     private double rating;
 
@@ -66,10 +48,10 @@ public class Movie {
     }
 
     public double getRating() {
-        if ((likes + dislikes) == 0){
+        if ((likes + dislikes) == 0) {
             return 0.0;
         }
-        rating = ((double)likes / (likes + dislikes));
+        rating = ((double) likes / (likes + dislikes));
         rating = Math.round(rating * 100.0) / 100.0;
         return rating * 10;
     }

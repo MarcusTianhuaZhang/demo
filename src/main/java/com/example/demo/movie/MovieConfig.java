@@ -8,10 +8,10 @@ import java.util.List;
 
 @Configuration
 public class MovieConfig {
-
+    //create instances of movie
     @Bean
     CommandLineRunner commandLineRunner(
-            MovieRepository repository){
+            MovieRepository repository) {
         return args -> {
             Movie shrek = new Movie("Shrek",
                     "good movie",

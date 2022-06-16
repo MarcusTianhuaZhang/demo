@@ -7,7 +7,8 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
-;import java.util.List;
+
+import java.util.List;
 
 @Configuration
 public class SecurityConfig {
@@ -30,31 +31,21 @@ public class SecurityConfig {
 
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.
                 httpBasic()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/api/v1/movie").hasAnyRole("ADMIN","USER")
+                .antMatchers("/api/v1/movie").hasAnyRole("ADMIN", "USER")
                 .antMatchers("/api/v1/movie/delete/{\\\\d+}").hasAnyRole("ADMIN")
                 .antMatchers("/api/v1/movie/{\\\\d+}/like").permitAll()
                 .antMatchers("/api/v1/movie/{\\\\d+}/dislike").permitAll()
                 .and()
                 .formLogin();
-        http.csrf().disable();
+        //http.csrf().disable();
 
         return http.build();
-}
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        UserDetails user = User.withDefaultPasswordEncoder()
-//                .username("user")
-//                .password("password")
-//                .roles("USER")
-//                .build();
-//        auth.inMemoryAuthentication()
-//                .withUser(user);
-//    }
+    }
 }
 
 
