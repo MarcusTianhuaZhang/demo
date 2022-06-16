@@ -11,4 +11,6 @@ Login is not required for like/dislike movie. To like a movie, send a put reques
 /api/v1/movie/{movie_title}/like
 
 Security implemented by hard-coded usernames and passwords for in memory authentication
+
+
 Spring Boot, JPA, Spring Security
