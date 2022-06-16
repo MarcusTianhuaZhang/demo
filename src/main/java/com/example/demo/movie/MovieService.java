@@ -77,4 +77,15 @@ public class MovieService {
             movie.setDuration(duration);
         }
     }
+    @Transactional
+    public void likeMovie(String title) {
+        Movie m = getMovieByTitle(title);
+        m.setLikes(m.getLikes() + 1);
+    }
+
+    @Transactional
+    public void dislikeMovie(String title) {
+        Movie m = getMovieByTitle(title);
+        m.setDislikes(m.getDislikes() + 1);
+    }
 }

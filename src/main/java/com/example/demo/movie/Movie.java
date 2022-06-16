@@ -24,11 +24,15 @@ public class Movie {
     private Integer releaseYear;
     private Double duration;
 
-//    @OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "movie")
-//    private Review review;
-    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Review> reviews;
+
+    private Integer likes;
+    private Integer dislikes;
+
+////    @OneToOne(cascade = CascadeType.ALL)
+////    @JoinColumn(name = "movie")
+////    private Review review;
+//    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    private List<Review> reviews;
 
     @Transient
     private double rating;
@@ -38,6 +42,8 @@ public class Movie {
         this.description = description;
         this.releaseYear = releaseYear;
         this.duration = duration;
+        this.likes = 0;
+        this.dislikes = 0;
     }
 
     public Movie() {
@@ -60,7 +66,12 @@ public class Movie {
     }
 
     public double getRating() {
-        return rating;
+        if ((likes + dislikes) == 0){
+            return 0.0;
+        }
+        rating = ((double)likes / (likes + dislikes));
+        rating = Math.round(rating * 100.0) / 100.0;
+        return rating * 10;
     }
 
     public void setTitle(String title) {
@@ -81,6 +92,22 @@ public class Movie {
 
     public void setRating(double rating) {
         this.rating = rating;
+    }
+
+    public Integer getLikes() {
+        return likes;
+    }
+
+    public void setLikes(Integer likes) {
+        this.likes = likes;
+    }
+
+    public Integer getDislikes() {
+        return dislikes;
+    }
+
+    public void setDislikes(Integer dislikes) {
+        this.dislikes = dislikes;
     }
 
     @Override

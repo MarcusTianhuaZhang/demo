@@ -45,8 +45,19 @@ public class MovieController {
         movieService.updateMovie(title, description,releaseYear,duration);
     }
 
+    @PutMapping(path = "/{movieTitle}/like")
+    public void likeMovie( @PathVariable("movieTitle") String title){
+        movieService.likeMovie(title);
 
-    @DeleteMapping(path = "{movieTitle}")
+    }
+
+    @PutMapping(path = "/{movieTitle}/dislike")
+    public void dislikeMovie(@PathVariable("movieTitle") String title){
+        movieService.dislikeMovie(title);
+
+    }
+
+    @DeleteMapping(path = "/delete/{movieTitle}")
     public void deleteMovie(@PathVariable("movieTitle") String title){
         movieService.deleteMovie(title);
     }
