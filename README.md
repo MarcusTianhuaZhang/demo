@@ -2,10 +2,10 @@
  REST API to manage, search and like/dislike movies.
  
  
- Application build with Spring Boot, 
+ Application built with Spring Boot, 
  
  object relational mapping with JPA, 
- connect to PostgreSQL database,
+ connected to PostgreSQL database,
  
  authentication and authorization with Spring Security
 
@@ -30,7 +30,7 @@ password: password
  oly ADMIN can delete movie.
  
 
- ### Saple Create Request:
+ ### Sample Create Request:
  ```
  POST http://localhost:8080/api/v1/movie
 Content-Type: application/json
@@ -61,7 +61,7 @@ Content-Type: application/json
  DELETE localhost:8080/api/v1/movie/delete/{movieTitle}
  ```
 ### like/dislike: 
-Login is not required for like/dislike movie. 
+Login is not required for like/dislike movie to achieve anonymity . 
 To like a movie, send a put request to 
 ```
 PUT /api/v1/movie/{movie_title}/like
